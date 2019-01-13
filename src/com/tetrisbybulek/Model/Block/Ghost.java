@@ -1,9 +1,12 @@
-package com.tetrisbybulek.Model.Block;
+package com.tetrisbybulek.Model.SpritedBlock;
 
-public class Ghost extends Block {
+import com.tetrisbybulek.Model.Block.SpritedBlock;
+import com.tetrisbybulek.Model.Piece.Pieces;
+
+public class Ghost extends SpritedBlock {
 
     public Ghost(){
-        super(true);
+        super(true, Pieces.None);
     }
 
     @Override

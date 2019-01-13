@@ -1,5 +1,7 @@
 package com.tetrisbybulek.Model.Block;
 
+import com.tetrisbybulek.Model.Piece.Pieces;
+
 public class Block {
     public static int width = 24;
     public static int height = 24;
@@ -11,6 +13,7 @@ public class Block {
 
     public Block(boolean empty){
         this.setEmpty(empty);
+
     }
 
     public boolean isEmpty(){
@@ -19,5 +22,9 @@ public class Block {
 
     public void setEmpty(boolean empty){
         this.empty = empty;
+    }
+
+    public Pieces getPieces(){
+        return null;
     }
 }

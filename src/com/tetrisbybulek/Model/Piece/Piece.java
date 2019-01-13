@@ -4,15 +4,14 @@ import com.tetrisbybulek.Model.Block.*;
 
 
 public class Piece {
-    static Block e = new Block(true);
-    static Block f = new Block(false);
+    static Block e = new SpritedBlock(true, Pieces.None);
 
     private final Block[][][] sprites;
     private final Block[][] board;
     //private final Ghost ghost;
 
     private final int startX = 3;
-    private final int startY = 10;
+    private final int startY = 21;
     private int rotation;
     private int x;
     private int y;
@@ -32,6 +31,12 @@ public class Piece {
         this.y = startY;
 
         this.type = type;
+
+        for( int i = 0; i < this.sprites[0].length; i++ ){
+            for( int j = 0; j < this.sprites[0][i].length; j++ ){
+                board[y - i][x + j] = this.sprites[0][i][j];
+            }
+        }
     }
 
     private int mod0to3(int value){
@@ -148,8 +153,6 @@ public class Piece {
         Block[][] piece = this.sprites[rotation];
         if(!( x >= -piece.length && x <= 9) || !( y >= 0 && y <= 21 )) return false;
 
-
-
         for( int i = 0; i < piece.length; i++ ){
             for( int j = 0; j < piece[i].length; j++ ){
                 int boardx = x + j;
@@ -163,7 +166,7 @@ public class Piece {
         return true;
     }
 
-    protected boolean isOnSurface(){
+    public boolean isOnSurface(){
         removePiece();
         boolean valid = isValid(x, y - 1, rotation);
         updatePiece();

@@ -1,8 +1,11 @@
 package com.tetrisbybulek.Model.Piece;
 
 import com.tetrisbybulek.Model.Block.Block;
+import com.tetrisbybulek.Model.Block.SpritedBlock;
 
 public class S extends Piece{
+    static Block f = new SpritedBlock(false, Pieces.S);
+
     private final static Block[][] s0 = {
             {e, f, f},
             {f, f, e},
