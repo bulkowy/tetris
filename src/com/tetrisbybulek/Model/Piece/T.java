@@ -4,6 +4,9 @@ import com.tetrisbybulek.Model.Block.Block;
 import com.tetrisbybulek.Model.Block.SpritedBlock;
 
 public class T extends Piece{
+    /**
+     * T-Shaped Piece object
+     */
     static Block f = new SpritedBlock(false, Pieces.T);
 
     private final static Block[][] s0 = {
@@ -28,6 +31,11 @@ public class T extends Piece{
     };
 
     public T(Block[][] board){
+        /**
+         * Parameter Constructor of T object
+         *
+         * @param board reference to main board
+         */
         super(board, s0, s1, s2, s3, Pieces.T);
     }
 }

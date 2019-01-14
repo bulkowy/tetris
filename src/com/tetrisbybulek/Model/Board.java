@@ -7,28 +7,27 @@ import com.tetrisbybulek.Model.Piece.*;
 import java.util.Random;
 
 public class Board {
-    // queue?
+    /**
+     * Board class defining main Tetris board and its methods
+     */
     private int cleanedLines;
     private int level;
     private int goal;
 
-    // time here or in controller?
-
     private Piece current;
-    private Piece hold; // if enough time -> implement
 
     private final Block[][] board;
 
     final int WIDTH = 10;
     final int HEIGHT = 22;
-    // pixel values?
 
     private final static SpritedBlock empty = new SpritedBlock(true, Pieces.None);
     private final PieceFactory factory;
 
-    // combo?
-
     public Board(){
+        /**
+         * No-Parameter Constructor of Board
+         */
         this.cleanedLines = 0;
         this.level = 1;
         this.goal = 5;
@@ -39,6 +38,10 @@ public class Board {
     }
 
     public void clearBoard(){
+        /**
+         * Function used for clearing board by replacing every
+         * block with empty block
+         */
         for ( int i = 0; i < HEIGHT; i++ ){
             for ( int j = 0; j < WIDTH; j++ ){
                 board[i][j] = empty;
@@ -47,33 +50,44 @@ public class Board {
     }
 
     public Piece getCurrent(){
+        /**
+         * Getter of current Piece
+         *
+         * @return current
+         */
         return current;
     }
-    public void setCurrent(Piece piece) { current = piece; }
-
-    public Piece getHold(){
-        return hold;
+    public void setCurrent(Piece piece) {
+        /**
+         * Setter of current Piece
+         *
+         * @param piece Piece to be set as current
+         */
+        current = piece;
     }
 
     public Block[][] getBoard(){
+        /**
+         * Getter of main Block matrix (board)
+         *
+         * @return board
+         */
         return board;
     }
 
-    public void printBoard(){
-
-        for (Block b[] : this.board){
-            for (Block _b : b){
-                System.out.print(Boolean.toString((_b.isEmpty())) + "\t");
-            }
-            System.out.println();
-        }
-    }
-
     public void tick(){
+        /**
+         * Function defining what should happen every time tick with Piece
+         */
         current.moveDown();
     }
 
     private int determineHeight() {
+        /**
+         * Function calculating maximum height Pieces have achieved
+         *
+         * @return height of Piece "tower"
+         */
         for (int i = 0; i < board.length; i++)
             if (isEmptyLine(i))
                 return i;
@@ -81,6 +95,11 @@ public class Board {
     }
 
     private boolean isEmptyLine(int y) {
+        /**
+         * Function used for checking if given line is empty
+         *
+         * @return True if line is empty, False otherwise
+         */
         boolean hasBlock = false;
         for (int j = 0; j < board[y].length; j++) {
             hasBlock ^= !board[y][j].isEmpty();
@@ -91,6 +110,11 @@ public class Board {
     }
 
     public boolean isGameover(){
+        /**
+         * Function used for cheking if game has ended
+         *
+         * @return True if height is >= 20, False otherwise
+         */
         if( determineHeight() >= 20 )
             return true;
         return false;
@@ -98,17 +122,12 @@ public class Board {
 
 
     public void nextPiece(){
+        /**
+         * Function used for creating new random Piece
+         * after the old one finished falling
+         */
         Random rand = new Random();
         int pieceIdx = rand.nextInt(7);
         current = factory.makePiece(pieceIdx);
     }
-
-    public void touchSurface(){
-        if( !current.isOnSurface() ) {
-            return;
-        }
-        nextPiece();
-    }
-
-    // todo board
 }

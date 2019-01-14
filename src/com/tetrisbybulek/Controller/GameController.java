@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameController {
+    /**
+     * Class GameController maintains main loop of the game
+     */
     private Board board;
     boolean started;
     Timer timer;
@@ -17,6 +20,12 @@ public class GameController {
     TetrisView tetrisView;
 
     public GameController(TetrisView tetrisView){
+        /**
+         * Parameter Constructor of GameController object
+         *
+         * @param tetrisView JComponent object used for presenting
+         *                   Main Tetris window
+         */
         started = true;
         board = new Board();
         board.nextPiece();
@@ -33,14 +42,28 @@ public class GameController {
     }
 
     public InputController getInputController(){
+        /**
+         * Getter of inputController attached to GameController
+         *
+         * @return controller field
+         */
         return controller;
     }
 
     public Board getBoard(){
+        /**
+         * Getter of Board attached to GameController
+         *
+         * @return board
+         */
         return board;
     }
 
     public void gameover(){
+        /**
+         * Function to serve all needed operations after gameover
+         * has happened
+         */
         if( board.isGameover() ){
             started = false;
             controller.isPaused = true;
@@ -51,6 +74,11 @@ public class GameController {
     }
 
     public void doTick(){
+        /**
+         * Function used every tick of timer
+         * Defines how should game react on time reaction
+         * on different circumstances
+         */
         if( controller.isPaused && started )
             return;
 
@@ -72,6 +100,12 @@ public class GameController {
     }
 
     private int clearLines() {
+        /**
+         * Function used for clearing lines if possible
+         * and shifting board accordingly to recent changes
+         *
+         * @return count of cleared lines
+         */
         int cleared = 0;
         for (int i = 0; i < board.getBoard().length; i++) {
             boolean hasHole = false;

@@ -8,11 +8,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TetrisView extends JComponent {
+    /**
+     * TetrisView class that is child of JComponent
+     * Serves as renderer of every Tetris model
+     */
     GameController gameController;
     Board board;
     int sideSize = 20;
 
     public TetrisView(){
+        /**
+         * No-Parameter Constructor of TetrisView object
+         */
         setFocusable(true);
         gameController = new GameController(this);
         board = gameController.getBoard();
@@ -20,15 +27,27 @@ public class TetrisView extends JComponent {
     }
 
     public void paint(Graphics g){
+        /**
+         * Function used to paint whole board with respect to existing blocks
+         *
+         * @param g Graphics object
+         */
         for( int i = 0; i < board.getBoard().length; i++ ){
             for( int j = 0; j < board.getBoard()[i].length; j++ ){
-                drawPiece(g, j, i, board.getBoard()[i][j].getPieces());
+                drawBlock(g, j, i, board.getBoard()[i][j].getPieces());
             }
         }
     }
 
-    public void drawPiece(Graphics g, int x, int y, Pieces pieces)
-    {
+    private void drawBlock(Graphics g, int x, int y, Pieces pieces) {
+        /**
+         * Function used for drawing single Block with color related to its type
+         *
+         * @param g Graphics object
+         * @param x Coordinate at X axis
+         * @param y Coordinate at Y axis
+         * @param pieces type of Block
+         */
         Color colors[] = { new Color(204, 102, 102),
                 new Color(102, 204, 102), new Color(102, 102, 204),
                 new Color(204, 204, 102), new Color(204, 102, 204),
